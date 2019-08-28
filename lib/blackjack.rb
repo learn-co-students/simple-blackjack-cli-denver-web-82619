@@ -19,12 +19,17 @@ def get_user_input
 end
 
 def end_game(total)
-  puts "Sorry, you hit #{total}. Thanks for playing!"
+  if total == 21
+    puts "Blackjack! You hit #{total}! Thanks for playing!"
+  else
+    puts "Sorry, you hit #{total}. Thanks for playing!"
+  end
 end
 
 def initial_round
   total = deal_card + deal_card
   display_card_total(total)
+  total
 end
 
 def hit?(total)
@@ -32,13 +37,12 @@ def hit?(total)
   user_input = get_user_input
   if user_input == "h"
     total += deal_card
-    puts total
-    hit?
+    total
   elsif user_input == "s"
-    puts total
-    hit?
+    total
   else
     invalid_command
+    hit?(total)
   end
 end
 
@@ -51,6 +55,13 @@ end
 #####################################################
 
 def runner
-  # code runner here
+  welcome
+  total = initial_round
+  while total < 21 do
+    total = hit?(total)
+    display_card_total(total)
+  end
+  end_game(total)
 end
     
+runner
