@@ -64,4 +64,5 @@ def runner
   end_game(total)
 end
     
-runner
+# Add a dealer later. Plays like normal, but stays when total >= 17.
+# Add option to manually end game.
